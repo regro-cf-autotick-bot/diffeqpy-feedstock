@@ -1,5 +1,5 @@
 {% set name = "diffeqpy" %}
-{% set version = "2.5.4" %}
+{% set version = "2.5.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/diffeqpy-{{ version }}.tar.gz
-  sha256: 543874615c74d4737c17e0fd3779626cb22d84a85fae95d780acbf9af05534c1
+  sha256: d5a0613341a8bdde690673513621d0b34c302068fb5eac4203b254e4407a7f59
 
 build:
   noarch: python
@@ -20,6 +20,7 @@ requirements:
     - pip
     - setuptools
   run:
+    - juliacall >=0.9.28
     - python >={{ python_min }}
     - pyjuliacall >=0.9.14
     - jill
