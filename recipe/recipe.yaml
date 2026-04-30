@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: diffeqpy
+  version: "2.5.5"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/diffeqpy-${{ version }}.tar.gz
+  sha256: d5a0613341a8bdde690673513621d0b34c302068fb5eac4203b254e4407a7f59
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - pyjuliacall >=0.9.28
+    - jill
+    # jill 0.11.5 has requirement fire<0.6.0,>=0.5.0, but you have fire 0.6.0.
+    - fire <0.6.0,>=0.5.0
+
+tests:
+  - python:
+      imports:
+        - diffeqpy
+      pip_check: false
+      python_version: ${{ python_min }}
+about:
+  summary: Solving Differential Equations in Python
+  license: MIT
+  license_file: LICENSE.md
+  homepage: http://github.com/SciML/diffeqpy
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
