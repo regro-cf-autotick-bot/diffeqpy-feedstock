@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: diffeqpy
-  version: "2.5.5"
+  version: 2.6.0
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/diffeqpy-${{ version }}.tar.gz
-  sha256: d5a0613341a8bdde690673513621d0b34c302068fb5eac4203b254e4407a7f59
+  sha256: 556db527e998f1ed9b461e46690fb22d2077d2955985020890e386f77170c547
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -24,11 +24,8 @@ requirements:
     - setuptools
   run:
     - python >=${{ python_min }}
-    - pyjuliacall >=0.9.28
     - jill
-    # jill 0.11.5 has requirement fire<0.6.0,>=0.5.0, but you have fire 0.6.0.
-    - fire <0.6.0,>=0.5.0
-
+    - juliacall >=0.9.28
 tests:
   - python:
       imports:
